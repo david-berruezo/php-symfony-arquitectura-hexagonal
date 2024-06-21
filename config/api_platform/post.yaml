@@ -1,0 +1,41 @@
+App\Domain\Post\Post:
+    properties:
+        id:
+            identifier: true
+    
+    collectionOperations:
+        post:
+            method: POST
+            messenger: true
+            input: App\Application\UseCase\Command\Post\Create\CreatePostInput
+            output: false
+            validate: false
+            status: 201
+            openapi_context:
+                summary: Creates a Post resource.
+                requestBody:
+                    required: true
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    title:
+                                        type: string
+                                        format: text
+                                        required: true
+                                    content:
+                                        type: string
+                                        format: text
+                                        required: true
+                                    publishedAt:
+                                        type: string
+                                        format: date-time
+                                        required: false
+                responses:
+                    201:
+                        description: Post created
+                    400:
+                        description: Invalid input
+    
+    itemOperations: []
